@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block content %}
+<section id="">
+	<div class="container" id="">
+		<div>
+			<ol class="breadcrumb" style="margin-bottom: 5px;">
+			  	<li><a href="{{ url_for('home') }}">Home</a></li>
+			  	<li><a href="#">{{ category.name }}</a></li>
+			  	<li class="active">{{ dinosaur.name }}</li>
+			</ol>
+		</div>
+		<br />
+		<div class="text-center" id="">
+			<img src="{{ dinosaur.image_url }}" class="img-responsive center-block" alt="{{ dinosaur.image_caption }}">
+			<blockquote class="text-center">
+				<p class="lead">{{ dinosaur.image_caption }}</p>
+			</blockquote>
+		</div>
+		<div class="text-center" id="item-info-{{ dinosaur.id }}">
+			<h1 class="display-3">{{ dinosaur.name }}</h1>
+			<hr />
+			<div class="row">
+				<div class="col-sm-2 text-right"><strong><p>Meaning</p></strong></div>
+				<div class="text-left"><p>{{ dinosaur.meaning }}</p></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2 text-right"><strong><p>Diet</p></strong></div>
+				<div class="text-left"><p>{{ dinosaur.diet }}</p></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2 text-right"><strong><p>Period</p></strong></div>
+				<div class="text-left"><p>{{ dinosaur.period }}</p></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2 text-right"><strong><p>Description</p></strong></div>
+				<div class="text-left"><p>{{ dinosaur.description }}</p></div>
+			</div>
+		</div>
+		{% if session.logged_in %}
+		<hr />
+		<div id="item-control">
+			<div class="row">
+				<div class="col-sm-2 text-right">
+					<nav class="nav">
+					  	<a class="nav-link" href="{{ url_for('editItem', category_id=category.id, category_item_id=dinosaur.id) }}"> Edit </a>
+					  	|
+					    <!-- link trigger modal -->
+					    <a class="nav-link" href="" data-toggle="modal" data-target="#confirmDelete"> Delete </a>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<!-- Confirm Delete Modal -->
+		<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		          <span class="sr-only">Close</span>
+		        </button>
+		        <h4 class="modal-title" id="confirmDeleteModel">Delete Entry</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>Are you sure you want to delete this entry??</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+		        <a href="{{ url_for('deleteItem', category_id=category.id, category_item_id=dinosaur.id) }}"><button type="button" class="btn btn-danger">Delete</button></a>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		{% endif %}
+	</div>
+</section>
+{% endblock %}

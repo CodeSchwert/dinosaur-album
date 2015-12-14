@@ -1,0 +1,55 @@
+    {% extends "layout.html" %}
+    {% block content %}
+    <nav> <!-- Nav tabs -->
+    <div class="nav nav-tabs">    
+      <div class="container">
+        <ul class="nav" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home" href="#Home" role="tab" data-toggle="tab">Home</a>
+          </li>
+          {% for category in categories %}
+          <li class="nav-item">
+              <a class="nav-link" id="{{ category.id }}" href="#{{ category.name }}" role="tab" data-toggle="tab">{{ category.name }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section id="content">
+      <div class="container">
+        <!-- Tab panes -->
+        <div class="tab-content">
+          
+          <div role="tabpanel" class="tab-pane fade in active" id="Home">
+            <div class="container text-center tab-title">
+              <br />
+              <h1>Recently Added Items</h1>
+              <br />
+              <br />
+            </div>
+            <div class="card-columns text-center" id="cards_home">
+            </div> <!-- End card-columns -->
+          </div> <!-- End Home tabpanel -->
+          {% for category in categories %}
+          <div role="tabpanel" class="tab-pane fade" id="{{ category.name }}">
+            <div class="container text-center tab-title">
+              <br />
+              <h1>{{ category.name }}</h1>
+              <br />
+            </div>
+            <div>
+              <p class="text-center">{{ category.description }}</p>
+            </div>
+            <br />
+            <div class="card-columns text-center" id="cards_{{ category.id }}">
+            </div>
+          </div> <!-- End {{ category.name }} -->
+          {% endfor %}
+
+        </div> <!-- End tab-content -->
+      </div> <!-- End Container -->
+    </section>
+
+    {% endblock %}

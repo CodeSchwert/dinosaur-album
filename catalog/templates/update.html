@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block content %}
+<section>
+    <div class="container">
+        <div>
+            <ol class="breadcrumb" style="margin-bottom: 5px;">
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    {% if not from_home %}
+                    <li><a href="#">{{ category.name }}</a></li>
+                    {% endif %}
+                    <li class="active">Edit a Dinosaur</li>
+            </ol>
+        </div>
+        <br />
+        <div id="createForm">
+            <form action="{{ url_for('editItem', category_id=category.id, category_item_id=dinosaur.id) }}" method="post" enctype="multipart/form-data">
+                <div class="form-group row">
+                    <label for="inputName" class="col-sm-2 form-control-label text-right"><strong>Name</strong></label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="inputName" value="{{ dinosaur.name }}" name="name" autofocus>
+                    </div>
+                </div>
+                <fieldset class="form-group row">
+				    <label for="inputCategory" class="col-sm-2 form-control-label text-right"><strong>Category</strong></label>
+				    <div class="col-sm-8">
+					    <select class="form-control" id="inputCategory" name="category" required>
+					    	{% if not from_home %}
+					    	<option value="{{ category.id }}">{{ category.name }}</option>
+					    	{% endif %}
+					    	{% for category in categories %}
+					    	<option value="{{ category.id }}">{{ category.name }}</option>
+					    	{% endfor %}
+					    </select>
+				    </div>
+				</fieldset>
+                <div class="form-group row">
+                    <label for="inputMeaning" class="col-sm-2 form-control-label text-right"><strong>Meaning</strong></label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="inputMeaning" value="{{ dinosaur.meaning }}" name="meaning">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPeriod" class="col-sm-2 form-control-label text-right"><strong>Period</strong></label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="inputPeriod" value="{{ dinosaur.period }}" name="period">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputDiet" class="col-sm-2 form-control-label text-right"><strong>Diet</strong></label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="inputDiet" value="{{ dinosaur.diet }}" name="diet">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputDescription" class="col-sm-2 form-control-label text-right"><strong>Description</strong></label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="inputDescription" value="{{ dinosaur.description }}" rows="3" name="description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputImage" class="col-sm-2 form-control-label text-right"><strong>Image</strong></label>
+                    <div class="col-sm-8">
+                        <input type="file" class="form-control-file" id="inputImage" value="{{ dinosaur.image_url }}" name="image">
+                        <small class="text-muted">Dinosaur Image. BMP, JPG, JPEG, PNG, and GIF files only please!</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputCaption" class="col-sm-2 form-control-label text-right"><strong>Image Caption</strong></label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="inputCaption" value="{{ dinosaur.image_caption }}" name="caption">
+                    </div>
+                </div>
+                <div class="form-group row">
+                	<div class="col-sm-2 form-control-label text-right"></div>
+                	<div class="col-sm-8">
+                		<button type="submit" class="btn btn-primary">Submit</button>
+                	</div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

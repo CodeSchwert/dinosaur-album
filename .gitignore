@@ -1,0 +1,14 @@
+# OS junk files
+[Tt]humbs.db
+*.DS_Store
+
+# Ignore OAuth secrets file
+catalog/client_secrets.json
+
+# Ignore SQLite DBs and Vagrant
+.vagrant/
+catalog/itemcatalogue.db
+*.db
+
+# Random file ...
+__main.html
